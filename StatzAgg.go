@@ -34,7 +34,7 @@ func NewLogStatzAgg(wtr io.Writer) *LogStatzAgg {
 }
 
 func (l *LogStatzAgg) toLogLine(statz *HTTPClientStatz) string {
-	return "\n" + statz.String()
+	return statz.String() + "\n"
 }
 
 //PostHTTPClientStats - post stats
