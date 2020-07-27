@@ -32,8 +32,8 @@ func (h *HTTPClientStatz) String() string {
 	//EndClock: ID, URL, Status, Bytes, Duration, Err
 	//  DNSLookup, Connect, TLSHandShake, ServerProcessing, StartTransfer
 	ret = fmt.Sprintf("%v: %v %v %v %v %v %v %v %v %v %v %v %v",
-		h.EndClock, h.ID, h.URL, h.Status, h.Bytes, h.EndClock.Sub(h.BegClock), err,
-		h.DNSLookup, h.Connect, h.TLSHandshake, h.ServerProcessing, h.StartTransfer, h.CdnHeaders,
+		h.EndClock.UTC().Format("2006-01-02T15:04:05.000Z07:00"), h.ID, h.URL, h.Status, h.Bytes, h.EndClock.Sub(h.BegClock).Milliseconds(), err,
+		h.DNSLookup.Milliseconds(), h.Connect.Milliseconds(), h.TLSHandshake.Milliseconds(), h.ServerProcessing.Milliseconds(), h.StartTransfer.Milliseconds(), h.CdnHeaders,
 	)
 	return ret
 }

@@ -74,7 +74,7 @@ func TestRequestStats(t *testing.T) {
 		"https://livesim.dashif.org/dash/vod/testpic_2s/V300/2.m4s",
 	}
 	for i, url := range urls {
-		go func(url string, i int) {
+		func(url string, i int) {
 			stats := helperGetURL(context.TODO(), url, "client"+strconv.Itoa(i), 10*time.Second)
 			t.Logf("%v\n", stats.String())
 		}(url, i)

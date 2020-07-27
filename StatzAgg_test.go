@@ -16,7 +16,7 @@ func TestLogStats(t *testing.T) {
 	}
 	logs := NewLogStatzAgg(os.Stderr)
 	for i, url := range urls {
-		go func(url string, i int) {
+		func(url string, i int) {
 			ctx := context.TODO()
 			stats := helperGetURL(ctx, url, "client"+strconv.Itoa(i), 10*time.Second)
 			logs.PostHTTPClientStats(ctx, stats)
