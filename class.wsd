@@ -1,0 +1,28 @@
+@startuml statzagg
+package github.com/tcnksm/go-httpstat {
+    class Result {
+    }
+}
+package StatzAgg {
+    interface StatzAgg {
+        + PostHTTPClientStats(HTTPClientStatz)
+    }
+    class HTTPClientStatz {
+        + String(): string
+        + ReadHTTPHeader(http.Header)
+    }
+    class LogStatzAgg { 
+        - wtr io.Writer
+        {static} NewLogStatzAgg(io.Writer)
+    }
+    Result ^-- HTTPClientStatz 
+    StatzAgg ^-- NullStatzAgg : Discards all Posts
+    StatzAgg ^-- LogStatzAgg : Logs to io.Writer
+    StatzAgg --> HTTPClientStatz : uses
+}
+package consumer {
+    consumer --> StatzAgg : PostHTTPClientStats
+    consumer --> HTTPClientStatz : ReadHTTPHeader
+    consumer --> HTTPClientStatz : Set Other values
+}
+@enduml
