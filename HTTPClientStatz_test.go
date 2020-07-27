@@ -76,7 +76,7 @@ func TestRequestStats(t *testing.T) {
 	for i, url := range urls {
 		go func(url string, i int) {
 			stats := helperGetURL(context.TODO(), url, "client"+strconv.Itoa(i), 10*time.Second)
-			t.Logf("%v", stats.String())
+			t.Logf("%v\n", stats.String())
 		}(url, i)
 	}
 }
